@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Registro de Usuario</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .password-container {
+      position: relative;
+      width: fit-content;
+    }
+
+    .toggle-eye {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 12px;
+      color: blue;
+      user-select: none;
+    }
+  </style>
+
+  <script>
+    // Validación de contraseña boliviana
+    function validateForm() {
+      var password = document.getElementById("password").value;
+      var regex = /^[67][0-9]{7}$/;
+
+      if (!regex.test(password)) {
+        alert("La contraseña debe tener 8 dígitos y comenzar con 6 o 7.");
+        return false;
+      }
+
+      alert("Registro exitoso!");
+      return true;
+    }
+
+    // Mostrar / Ocultar contraseña
+    function togglePassword() {
+      var field = document.getElementById("password");
+      var eye = document.getElementById("eye");
+
+      if (field.type === "password") {
+        field.type = "text";
+        eye.textContent = "Ocultar";
+      } else {
+        field.type = "password";
+        eye.textContent = "Mostrar";
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <h2>Registro de Usuario</h2>
+
+  <form onsubmit="return validateForm()">
+
+    <!-- Usuario -->
+    <label for="username">Usuario:</label><br>
+    <input type="text" id="username" required>
+    <br><br>
+
+    <!-- Contraseña -->
+    <label for="password">Contraseña (Num. de Bolivia)</label><br>
+    <div class="password-container">
+      <input type="password" id="password" required>
+      <span id="eye" class="toggle-eye" onclick="togglePassword()">Mostrar</span>
+    </div>
+
+    <br><br>
+
+    <input type="submit" value="Registrarse">
+  </form>
+
+</body>
+</html>
+
+
